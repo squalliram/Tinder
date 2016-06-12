@@ -21,7 +21,7 @@ class SIgnUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender"])
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email"])
         graphRequest.startWithCompletionHandler { (connection, result, error) in
             if error != nil {
                 print(error)
@@ -30,6 +30,7 @@ class SIgnUpViewController: UIViewController {
                 
                 PFUser.currentUser()!["gender"] = result["gender"]!
                 PFUser.currentUser()!["name"] = result["name"]!
+                PFUser.currentUser()!["email"] = result["email"]!
                 
                 PFUser.currentUser()?.saveInBackground()
                 
